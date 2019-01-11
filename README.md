@@ -12,8 +12,6 @@ Every NN has three types of layers: input, hidden, and output. Creating the NN a
 
 ### Input layer
 
-Simple--every NN has exactly one of them--no exceptions that I'm aware of.
-
 With respect to the number of neurons comprising this layer, this parameter is completely and uniquely determined once you know the shape of your training data. Specifically, the number of neurons comprising that layer is equal to the number of features (columns) in your data. Some NN configurations add one additional node for a bias term.
   
 ### Output layer
@@ -55,6 +53,16 @@ The **learning rate** is one of the most important hyper-parameters to tune for 
 If the learning rate is high, then training may not converge or even diverge. Weight changes can be so big that the optimizer overshoots the minimum and makes the loss worse.
 
 The training should start from a relatively large learning rate because, in the beginning, random weights are far from optimal, and then the learning rate can decrease during training to allow more fine-grained weight updates.
+
+# Improving
+
+There a lot of things you can do to improve your NN: 
+
+- Batch Normalization: Batch normalization enables the use of higher learning rates, greatly accelerating the learning process. It also enabled the training of deep neural networks with sigmoid activations that were previously deemed too difficult to train due to the vanishing gradient problem.
+- Random horizontal flipping
+- Random crop:resize to nxn and do random crop
+- Fully connected layer wider (more neurons)
+- Dropout: it is a technique used to improve over-fit on neural networks, you should use Dropout along with other techniques like L2 Regularization. 
 
 # Accuracy & Loss
 
