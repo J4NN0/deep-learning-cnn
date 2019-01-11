@@ -58,9 +58,9 @@ The training should start from a relatively large learning rate because, in the 
 
 There a lot of things you can do to improve your NN: 
 
-- Batch Normalization: Batch normalization enables the use of higher learning rates, greatly accelerating the learning process. It also enabled the training of deep neural networks with sigmoid activations that were previously deemed too difficult to train due to the vanishing gradient problem.
+- Batch Normalization: Batch normalization enables the use of higher learning rates, greatly accelerating the learning process. It also enabled the training of deep neural networks with sigmoid activations that were previously deemed too difficult to train due to the vanishing gradient problem. The whole point of BN is to adjust the values before they hit the activation function, so as to avoid the vanishing gradient problem.
 - Random horizontal flipping
-- Random crop:resize to nxn and do random crop
+- Random crop: resize to nxn and do random crop.
 - Fully connected layer wider (more neurons)
 - Dropout: it is a technique used to improve over-fit on neural networks, you should use Dropout along with other techniques like L2 Regularization. 
 
