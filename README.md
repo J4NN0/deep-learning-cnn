@@ -18,6 +18,8 @@ It trains a traditional 2 hidden layers + last FC layer network on the CIFAR 100
 
 A Convolutional Neural Network (CNN) is a class of deep neural networks, most commonly applied to analyzing visual imagery.
 
+# ResNet18 Class
+
 # Useful link
 
 - [NN tutorial](https://pytorch.org/tutorials/beginner/blitz/neural_networks_tutorial.html)
