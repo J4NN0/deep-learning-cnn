@@ -52,17 +52,29 @@ The **learning rate** is one of the most important hyper-parameters to tune for 
 
 If the learning rate is high, then training may not converge or even diverge. Weight changes can be so big that the optimizer overshoots the minimum and makes the loss worse.
 
-The training should start from a relatively large learning rate because, in the beginning, random weights are far from optimal, and then the learning rate can decrease during training to allow more fine-grained weight updates.
+The below diagram demonstrates the different scenarios one can fall into when configuring the learning rate.
+
+![photo](https://cdn-images-1.medium.com/max/800/0*uIa_Dz3czXO5iWyI.)
+*[From](https://towardsdatascience.com/understanding-learning-rates-and-how-it-improves-performance-in-deep-learning-d0d4059c1c10)*
+
+Furthermore, the learning rate affects how quickly our model can converge to a local minima (aka arrive at the best accuracy). Thus getting it right from the get go would mean lesser time for us to train the model.
+
+**How choose best learning rate?** If we record the learning at each iteration and plot the learning rate (log) against loss; we will see that as the learning rate increase, there will be a point where the loss stops decreasing and starts to increase. In practice, our learning rate should ideally be somewhere to the left to the lowest point of the graph.
 
 # Improving
 
 There a lot of things you can do to improve your NN: 
 
-- Batch Normalization: Batch normalization enables the use of higher learning rates, greatly accelerating the learning process. It also enabled the training of deep neural networks with sigmoid activations that were previously deemed too difficult to train due to the vanishing gradient problem. The whole point of BN is to adjust the values before they hit the activation function, so as to avoid the vanishing gradient problem.
+- Batch normalization: it enables the use of higher learning rates, greatly accelerating the learning process. It also enabled the training of deep neural networks with sigmoid activations that were previously deemed too difficult to train due to the vanishing gradient problem. The whole point of BN is to adjust the values before they hit the activation function, so as to avoid the vanishing gradient problem.
 - Random horizontal flipping
 - Random crop: resize to nxn and do random crop.
 - Fully connected layer wider (more neurons)
-- Dropout: it is a technique used to improve over-fit on neural networks, you should use Dropout along with other techniques like L2 Regularization. 
+- Dropout: it is a technique used to improve over-fit on neural networks, you should use Dropout along with other techniques like L2 Regularization.
+  - Generally, use a small dropout value of 20%-50% of neurons with 20% providing a good starting point. A probability too low has minimal effect and a value too high results in under-learning by the network.
+  - Use a larger network. You are likely to get better performance when dropout is used on a larger network, giving the model more of an opportunity to learn independent representations.
+  - Use dropout on incoming (visible) as well as hidden units. Application of dropout at each layer of the network has shown good results.
+  - Use a large learning rate with decay and a large momentum. Increase your learning rate by a factor of 10 to 100 and use a high momentum value of 0.9 or 0.99.
+  - Constrain the size of network weights. A large learning rate can result in very large network weights. Imposing a constraint on the size of network weights such as max-norm regularization with a size of 4 or 5 has been shown to improve results.
 
 # Accuracy & Loss
 
