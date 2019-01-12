@@ -74,8 +74,9 @@ Furthermore, the learning rate affects how quickly our model can converge to a l
 There a lot of things you can do to improve your NN: 
 
 - Batch normalization (at every convolutional layer): it enables the use of higher learning rates, greatly accelerating the learning process. It also enabled the training of deep neural networks with sigmoid activations that were previously deemed too difficult to train due to the vanishing gradient problem. The whole point of BN is to adjust the values before they hit the activation function, so as to avoid the vanishing gradient problem.
-- Random horizontal flipping
-- Random crop: resize to *NxN* and do random crop.
+- Data augmentation: it is the creation of altered copies of each instance within a training dataset.
+  - Random horizontal flipping
+  - Random crop: resize to *NxN* and do random crop.
 - Fully connected layer wider (more neurons)
 - Dropout: it is a technique used to improve over-fit on neural networks, you should use Dropout along with other techniques like L2 Regularization.
   - Generally, use a small dropout value of 20%-50% of neurons with 20% providing a good starting point. A probability too low has minimal effect and a value too high results in under-learning by the network.
