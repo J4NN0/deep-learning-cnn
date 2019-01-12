@@ -109,8 +109,6 @@ There are also some subtleties while reducing the loss value. For instance, you 
 - ResNet18
 
   A pretrained netowrk on ImageNet and finetune it on the CIFAR 100 training set.
-  
-### ResNet18 Class
 
 # Useful link
 
