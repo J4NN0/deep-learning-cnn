@@ -52,10 +52,9 @@ The **learning rate** is one of the most important hyper-parameters to tune for 
 
 If the learning rate is high, then training may not converge or even diverge. Weight changes can be so big that the optimizer overshoots the minimum and makes the loss worse.
 
-The below diagram demonstrates the different scenarios one can fall into when configuring the learning rate.
+The below [diagram](https://towardsdatascience.com/understanding-learning-rates-and-how-it-improves-performance-in-deep-learning-d0d4059c1c10) demonstrates the different scenarios one can fall into when configuring the learning rate.
 
 ![photo](https://cdn-images-1.medium.com/max/800/0*uIa_Dz3czXO5iWyI.)
-*[From](https://towardsdatascience.com/understanding-learning-rates-and-how-it-improves-performance-in-deep-learning-d0d4059c1c10)*
 
 Furthermore, the learning rate affects how quickly our model can converge to a local minima (aka arrive at the best accuracy). Thus getting it right from the get go would mean lesser time for us to train the model.
 
@@ -65,9 +64,9 @@ Furthermore, the learning rate affects how quickly our model can converge to a l
 
 There a lot of things you can do to improve your NN: 
 
-- Batch normalization: it enables the use of higher learning rates, greatly accelerating the learning process. It also enabled the training of deep neural networks with sigmoid activations that were previously deemed too difficult to train due to the vanishing gradient problem. The whole point of BN is to adjust the values before they hit the activation function, so as to avoid the vanishing gradient problem.
+- Batch normalization (at every convolutional layer): it enables the use of higher learning rates, greatly accelerating the learning process. It also enabled the training of deep neural networks with sigmoid activations that were previously deemed too difficult to train due to the vanishing gradient problem. The whole point of BN is to adjust the values before they hit the activation function, so as to avoid the vanishing gradient problem.
 - Random horizontal flipping
-- Random crop: resize to nxn and do random crop.
+- Random crop: resize to *NxN* and do random crop.
 - Fully connected layer wider (more neurons)
 - Dropout: it is a technique used to improve over-fit on neural networks, you should use Dropout along with other techniques like L2 Regularization.
   - Generally, use a small dropout value of 20%-50% of neurons with 20% providing a good starting point. A probability too low has minimal effect and a value too high results in under-learning by the network.
@@ -90,14 +89,18 @@ There are also some subtleties while reducing the loss value. For instance, you 
 
 # Classes
 
-### NN Class
+- NN Class
 
-The NN class provides and two hidden layers and one FC layer network. I trained this class on the CIFAR 100 train set.
+  The NN class provides two hidden layers and one FC layer network. I trained this class on the CIFAR 100 train set.
 
-### CNN Class
+- CNN Class
 
-A Convolutional Neural Network (CNN) is a class of deep neural networks, most commonly applied to analyzing visual imagery.
+  The CNN class provides several layers within batch normalization and RELU funciton.
+  
+- ResNet18
 
+  A pretrained netowrk on ImageNet and finetune it on the CIFAR 100 training set.
+  
 ### ResNet18 Class
 
 # Useful link
