@@ -6,6 +6,10 @@ The code implements a basic NN and CNN, the data loading, the training phase and
 
 **Hint:** I suggest you to do not use your NVIDIA card (or other) in your PC. Usually it does not have a well done Deep Learning framework setup. So, you can use [google colab](https://colab.research.google.com/): a very user friendly python notebook from Google in which you can install python packages, download datasets, plot images, and you have a free GPU to do trainings!
 
+# Menu
+
+  - [Main concepts](https://github.com/J4NN0/deep-learning-cnn/blob/master/README.md#main-concepts)
+
 # Main concepts
 
 Every NN has three types of layers: input, hidden, and output. Creating the NN architecture therefore means coming up with values for the number of layers of each type and the number of nodes in each of these layers.
