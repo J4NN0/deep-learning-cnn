@@ -8,7 +8,7 @@ The code implements a basic NN and CNN, the data loading, the training phase and
 
 # Menu
 
-  - [Main concepts](https://github.com/J4NN0/deep-learning-cnn/blob/master/README.md#main-concepts)
+  - [Main concepts](#main-concepts)
 
 # Main concepts
 
