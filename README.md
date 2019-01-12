@@ -11,7 +11,7 @@ The code implements a basic NN and CNN, the data loading, the training phase and
   - [Main concepts](#main-concepts)
   - [Optimization of the Network Configuration](#optimization-of-the-network-configuration)
   - [Improving](#improving)
-  - [Accuracy & Loss](#accuracy-&-loss)
+  - [Accuracy & Loss](#accuracy--loss)
   - [Classes](#classes)
   - [Useful link](#useful-link)
 
