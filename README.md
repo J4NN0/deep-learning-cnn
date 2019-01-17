@@ -104,7 +104,7 @@ There are also some subtleties while reducing the loss value. For instance, you 
 
 - CNN Class
 
-  The CNN class provides several layers within batch normalization and RELU funciton.
+  The CNN class trained from scratch.
   
 - ResNet18
 
@@ -114,3 +114,4 @@ There are also some subtleties while reducing the loss value. For instance, you 
 
 - [NN tutorial](https://pytorch.org/tutorials/beginner/blitz/neural_networks_tutorial.html)
 - [Data Augmentation](https://colab.research.google.com/drive/109vu3F1LTzD1gdVV6cho9fKGx7lzbFll#scrollTo=yLEwF_2RzGs0)
+- [Optimizer](https://pytorch.org/docs/stable/optim.html)

@@ -73,14 +73,69 @@ def test_accuracy(net, dataloader):
     print('Accuracy of the network on the test set: %d %%' % (
     accuracy))
     return accuracy
- 
+
+    
+n_classes = 100 
+# function to define an old style fully connected network (multilayer perceptrons)
+class old_nn(nn.Module):
+    def __init__(self):
+        super(old_nn, self).__init__()
+        self.fc1 = nn.Linear(32*32*3, 4096)
+        self.fc2 = nn.Linear(4096, 4096)
+        self.fc3 = nn.Linear(4096, n_classes) #last FC for classification 
+
+    def forward(self, x):
+        x = x.view(x.shape[0], -1)
+        x = F.sigmoid(self.fc1(x))
+        x = F.sigmoid(self.fc2(x))
+        x = self.fc3(x)
+        return x
+      
+      
+#function to define the convolutional network
+class CNN(nn.Module):
+    def __init__(self):
+        super(CNN, self).__init__()
+        #conv2d first parameter is the number of kernels at input (you get it from the output value of the previous layer)
+        #conv2d second parameter is the number of kernels you wanna have in your convolution, so it will be the n. of kernels at output.
+        #conv2d third, fourtsh and fifth parameters are, as you can read, kernel_size, stride and zero padding :)
+        self.conv1 = nn.Conv2d(3, 128, kernel_size=5, stride=2, padding=0)
+        self.conv1_bn = nn.BatchNorm2d(128)
+        self.conv2 = nn.Conv2d(128, 128, kernel_size=3, stride=1, padding=0)
+        self.conv2_bn = nn.BatchNorm2d(128)
+        self.conv3 = nn.Conv2d(128, 128, kernel_size=3, stride=1, padding=0)
+        self.conv3_bn = nn.BatchNorm2d(128)
+        self.pool = nn.MaxPool2d(kernel_size=2, stride=2, padding=0)
+        self.conv_final = nn.Conv2d(128, 256, kernel_size=3, stride=1, padding=0)
+        self.conv_final_bn = nn.BatchNorm2d(256)        
+        self.fc1 = nn.Linear(256 * 4 * 4, 4096)
+        self.dropout = nn.Dropout(0.3)
+        self.fc2 = nn.Linear(4096, n_classes) #last FC for classification 
+
+    def forward(self, x):
+        x = F.relu(self.conv1(x))
+        x = self.conv1_bn(x)
+        x = F.relu(self.conv2(x))
+        x = self.conv2_bn(x)
+        x = F.relu(self.conv3(x))
+        x = self.conv3_bn(x)
+        #x = F.relu(self.pool(self.conv_final(x)))
+        x = F.relu(self.pool(self.conv_final_bn(self.conv_final(x))))
+        x = x.view(x.shape[0], -1)
+        x = F.relu(self.fc1(x))
+        #Dropout
+        x = F.dropout(x)
+        x = self.fc2(x)
+        return x
 
 ####RUNNING CODE FROM HERE:
       
 #transform are heavily used to do simple and complex transformation and data augmentation
 transform_train = transforms.Compose(
     [
-     transforms.RandomHorizontalFlip(),
+     #transforms.RandomHorizontalFlip(),
+     #transforms.Resize((40, 40)), #crop
+     #transforms.RandomCrop((32, 32)), #crop
      transforms.Resize((224, 224)),
      transforms.ToTensor(),
      transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5)),
@@ -107,9 +162,18 @@ testloader = torch.utils.data.DataLoader(testset, batch_size=128,
 dataiter = iter(trainloader)
 
 ###Show images:
-images, labels = dataiter.next()
-imshow(torchvision.utils.make_grid(images))
+#images, labels = dataiter.next()
+#imshow(torchvision.utils.make_grid(images))
 ###
+
+
+###NN network
+#net = old_nn()
+###
+
+###CNN
+#net = CNN()
+####
 
 ####
 #Residual Network:
@@ -118,7 +182,8 @@ net.fc = nn.Linear(512, n_classes) #changing the fully connected layer of the al
 ####
 
 
-###Kernel:
+
+###OPTIONAL:
 #print("####plotting kernels of conv1 layer:####")
 #plot_kernel(net)
 ###
@@ -129,7 +194,7 @@ net = net.cuda()
 criterion = nn.CrossEntropyLoss().cuda() #it already does softmax computation for use!
 optimizer = optim.Adam(net.parameters(), lr=0.0001) #better convergency w.r.t simple SGD :)
 
-###Kernel:
+###OPTIONAL:
 #print("####plotting output of conv1 layer:#####")
 #plot_kernel_output(net,images)  
 ###
