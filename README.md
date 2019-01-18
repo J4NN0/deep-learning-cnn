@@ -106,13 +106,33 @@ There are also some subtleties while reducing the loss value. For instance, you 
 - CNN Class
 
   The CNN class trained from scratch.
+
+  I decided to implement the **Stochastic gradient descent** (SGD) optimizer: also known as incremental gradient descent, is an iterative method for optimizing a differentiable objective function, a stochastic approximation of gradient descent optimization. It is called stochastic because samples are selected randomly (or shuffled) instead of as a single group (as in standard gradient descent) or in the order they appear in the training set.
   
+  At this point I changed the number of **epochs**. The SGD optimizer needs an higher number of epochs in order to return the best accuracy.
+        
+  Then I used **data augmentation** in order to create altered copy of each instance and improve the training: I used the **RandomHorizontalFlip()**.
+
+  After that, I tried different setting parameters for each used layer:
+  - Convolutional layer         
+    - Kernel size
+    - Stride
+    - Padding
+  - Batch Normalization
+    - momentum
+    - affine
+  - Dropout
+  - Number of neurons
+        
+  Finally, I focused my attention on the type and the number of used layer.
+
 - ResNet18
 
   A pretrained netowrk on ImageNet and finetune it on the CIFAR 100 training set.
 
 # Useful link
 
+- [PyTorch NN](https://pytorch.org/docs/stable/nn.html)
 - [NN tutorial](https://pytorch.org/tutorials/beginner/blitz/neural_networks_tutorial.html)
 - [Data Augmentation](https://colab.research.google.com/drive/109vu3F1LTzD1gdVV6cho9fKGx7lzbFll#scrollTo=yLEwF_2RzGs0)
 - [Optimizer](https://pytorch.org/docs/stable/optim.html)

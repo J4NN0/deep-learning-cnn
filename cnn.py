@@ -76,40 +76,21 @@ def test_accuracy(net, dataloader):
 
     
 n_classes = 100 
-# function to define an old style fully connected network (multilayer perceptrons)
-class old_nn(nn.Module):
-    def __init__(self):
-        super(old_nn, self).__init__()
-        self.fc1 = nn.Linear(32*32*3, 4096)
-        self.fc2 = nn.Linear(4096, 4096)
-        self.fc3 = nn.Linear(4096, n_classes) #last FC for classification 
-
-    def forward(self, x):
-        x = x.view(x.shape[0], -1)
-        x = F.sigmoid(self.fc1(x))
-        x = F.sigmoid(self.fc2(x))
-        x = self.fc3(x)
-        return x
-      
-      
 #function to define the convolutional network
 class CNN(nn.Module):
     def __init__(self):
         super(CNN, self).__init__()
-        #conv2d first parameter is the number of kernels at input (you get it from the output value of the previous layer)
-        #conv2d second parameter is the number of kernels you wanna have in your convolution, so it will be the n. of kernels at output.
-        #conv2d third, fourtsh and fifth parameters are, as you can read, kernel_size, stride and zero padding :)
-        self.conv1 = nn.Conv2d(3, 128, kernel_size=5, stride=2, padding=0)
-        self.conv1_bn = nn.BatchNorm2d(128)
-        self.conv2 = nn.Conv2d(128, 128, kernel_size=3, stride=1, padding=0)
-        self.conv2_bn = nn.BatchNorm2d(128)
-        self.conv3 = nn.Conv2d(128, 128, kernel_size=3, stride=1, padding=0)
-        self.conv3_bn = nn.BatchNorm2d(128)
+        self.conv1 = nn.Conv2d(3, 512, kernel_size=5, stride=2, padding=0)
+        self.conv1_bn = nn.BatchNorm2d(512)
+        self.conv2 = nn.Conv2d(512, 512, kernel_size=3, stride=1, padding=0)
+        self.conv2_bn = nn.BatchNorm2d(512)
+        self.conv3 = nn.Conv2d(512, 512, kernel_size=3, stride=1, padding=0)
+        self.conv3_bn = nn.BatchNorm2d(512)
         self.pool = nn.MaxPool2d(kernel_size=2, stride=2, padding=0)
-        self.conv_final = nn.Conv2d(128, 256, kernel_size=3, stride=1, padding=0)
-        self.conv_final_bn = nn.BatchNorm2d(256)        
-        self.fc1 = nn.Linear(256 * 4 * 4, 4096)
-        self.dropout = nn.Dropout(0.3)
+        self.conv_final = nn.Conv2d(512, 1024, kernel_size=3, stride=1, padding=0)
+        self.conv_final_bn = nn.BatchNorm2d(1024)        
+        self.fc1 = nn.Linear(1024 * 4 * 4, 4096)
+        self.dropout = nn.Dropout(0.5)
         self.fc2 = nn.Linear(4096, n_classes) #last FC for classification 
 
     def forward(self, x):
@@ -119,31 +100,97 @@ class CNN(nn.Module):
         x = self.conv2_bn(x)
         x = F.relu(self.conv3(x))
         x = self.conv3_bn(x)
-        #x = F.relu(self.pool(self.conv_final(x)))
         x = F.relu(self.pool(self.conv_final_bn(self.conv_final(x))))
         x = x.view(x.shape[0], -1)
         x = F.relu(self.fc1(x))
-        #Dropout
-        x = F.dropout(x)
+        x = self.dropout(x) #Dropout
         x = self.fc2(x)
         return x
 
-####RUNNING CODE FROM HERE:
+""""      
+class myCNN(nn.Module):
+    def __init__(self):
+        super(myCNN, self).__init__()
+        self.conv1 = nn.Conv2d(3, 64, kernel_size=7, stride=2, padding=3, bias=False)
+        self.bn1 = nn.BatchNorm2d(64, momentum=0.1, affine=True)
+        self.pool1 = nn.MaxPool2d(kernel_size=3, stride=2, padding=1, dilation=1)
+        
+        self.conv2 = nn.Conv2d(64, 64, kernel_size=3, stride=1, padding=1, bias=False)
+        
+        self.conv3 = nn.Conv2d(64, 128, kernel_size=3, stride=2, padding=1, bias=False)
+        self.bn2 = nn.BatchNorm2d(128, momentum=0.1, affine=True)
+        self.conv4 = nn.Conv2d(128, 128, kernel_size=3, stride=1, padding=1, bias=False)
+        
+        self.conv5 = nn.Conv2d(128, 256, kernel_size=3, stride=1, padding=1, bias=False)
+        self.bn3 = nn.BatchNorm2d(256, momentum=0.1, affine=True)
+        self.conv6 = nn.Conv2d(256, 256, kernel_size=3, stride=2, padding=1, bias=False)
+        
+        self.conv7 = nn.Conv2d(256, 512, kernel_size=3, stride=1, padding=1, bias=False)
+        self.bn4 = nn.BatchNorm2d(512, momentum=0.1, affine=True)
+        self.conv8 = nn.Conv2d(512, 512, kernel_size=3, stride=1, padding=1, bias=False)
+        
+        self.m = nn.AvgPool2d(3, stride=1)
+             
+        self.fc1 = nn.Linear(512*4*4, 4096)
+        self.dropout = nn.Dropout(0.8)
+        self.fc2 = nn.Linear(4096, n_classes)
+
+    def forward(self, x):
+        x = F.relu(self.bn1(self.conv1(x)))
+        x = self.pool1(x)
+        #Layer 1
+        #1-Basic block 0
+        x = F.relu(self.bn1(self.conv2(x)))
+        x = self.bn1(self.conv2(x))
+        #1-Basic block 1
+        x = F.relu(self.bn1(self.conv2(x)))
+        x = self.bn1(self.conv2(x))
+        #Layer 2
+        #2-Basic block 0
+        x = F.relu(self.bn2(self.conv3(x)))
+        x = self.bn2(self.conv4(x))
+        #2-Basick block 1
+        x = F.relu(self.bn2(self.conv4(x)))
+        x = self.bn2(self.conv4(x))
+        #Layer 3
+        #3-Basic block 0
+        x = F.relu(self.bn3(self.conv5(x)))
+        x = self.bn3(self.conv6(x))
+        #3-Basic block 1
+        x = F.relu(self.bn3(self.conv6(x)))
+        x = self.bn3(self.conv6(x))
+        #Layer 4
+        #4-Basic block 0
+        x = F.relu(self.bn4(self.conv7(x)))
+        x = self.bn4(self.conv8(x))
+        #4-Basic block 1
+        x = F.relu(self.bn4(self.conv8(x)))
+        x = self.bn4(self.conv8(x))
+        #AVG Pool 2s
+        #x = self.m(x)
+        #Fully connected layer
+        x = x.view(x.shape[0], -1)
+        x = F.relu(self.fc1(x))
+        #x = dropout(x)
+        x = self.fc2(x)
+        return x
+"""""
+
       
 #transform are heavily used to do simple and complex transformation and data augmentation
 transform_train = transforms.Compose(
     [
-     #transforms.RandomHorizontalFlip(),
+     transforms.RandomHorizontalFlip(),
      #transforms.Resize((40, 40)), #crop
      #transforms.RandomCrop((32, 32)), #crop
-     transforms.Resize((224, 224)),
+     transforms.Resize((32, 32)),
      transforms.ToTensor(),
      transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5)),
     ])
 
 transform_test = transforms.Compose(
     [
-     transforms.Resize((224,224)),
+     transforms.Resize((32,32)),
      transforms.ToTensor(),
      transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5)),
      ])
@@ -162,50 +209,39 @@ testloader = torch.utils.data.DataLoader(testset, batch_size=128,
 dataiter = iter(trainloader)
 
 ###Show images:
-#images, labels = dataiter.next()
-#imshow(torchvision.utils.make_grid(images))
+images, labels = dataiter.next()
+imshow(torchvision.utils.make_grid(images))
 ###
 
-
-###NN network
-#net = old_nn()
-###
 
 ###CNN
-#net = CNN()
-####
-
-####
-#Residual Network:
-net = models.resnet18(pretrained=True)
-net.fc = nn.Linear(512, n_classes) #changing the fully connected layer of the already allocated network
+net = CNN()
 ####
 
 
-
-###OPTIONAL:
+###Kernel:
 #print("####plotting kernels of conv1 layer:####")
 #plot_kernel(net)
 ###
 
-
 net = net.cuda()
 
 criterion = nn.CrossEntropyLoss().cuda() #it already does softmax computation for use!
-optimizer = optim.Adam(net.parameters(), lr=0.0001) #better convergency w.r.t simple SGD :)
+#optimizer = optim.Adam(net.parameters(), lr=0.001)
+optimizer = optim.SGD(net.parameters(), lr = 0.01, momentum=0.9)
 
-###OPTIONAL:
+###Kernel:
 #print("####plotting output of conv1 layer:#####")
 #plot_kernel_output(net,images)  
 ###
 
 ########TRAINING PHASE###########
-n_loss_print = len(trainloader)  #print every epoch, use smaller numbers if you wanna print loss more often!
+n_loss_print = len(trainloader)  #print every epoch, smaller numbers will print loss more often!
 
 losses=[]
 accuracy = []
 
-n_epochs = 10
+n_epochs = 30
 for epoch in range(n_epochs):  # loop over the dataset multiple times
     net.train() #important for activating dropout and correctly train batchnorm
     running_loss = 0.0
@@ -233,7 +269,7 @@ for epoch in range(n_epochs):  # loop over the dataset multiple times
     accuracy.append(test_accuracy(net,testloader))
 
 print('Finished Training')
-    
+
 plt.title('Training loss & accuracy curves')
 plt.xlabel('Epoch')
 plt.ylabel('Accuracy / Loss')
