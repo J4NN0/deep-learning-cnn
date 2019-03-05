@@ -107,9 +107,9 @@ There are also some subtleties while reducing the loss value. For instance, you 
 
   The CNN class trained from scratch.
 
-  I decided to implement the **Stochastic gradient descent** (SGD) optimizer: also known as incremental gradient descent, is an iterative method for optimizing a differentiable objective function, a stochastic approximation of gradient descent optimization. It is called stochastic because samples are selected randomly (or shuffled) instead of as a single group (as in standard gradient descent) or in the order they appear in the training set.
+  I decided to use the **Stochastic gradient descent** (SGD) optimizer: also known as incremental gradient descent, is an iterative method for optimizing a differentiable objective function, a stochastic approximation of gradient descent optimization. It is called stochastic because samples are selected randomly (or shuffled) instead of as a single group (as in standard gradient descent) or in the order they appear in the training set.
   
-  At this point I changed the number of **epochs**. The SGD optimizer needs an higher number of epochs in order to return the best accuracy.
+  At this point I set the number of **epochs** to 30. The SGD optimizer needs an higher number of epochs in order to return the best accuracy.
         
   Then I used **data augmentation** in order to create altered copy of each instance and improve the training: I used the **RandomHorizontalFlip()**.
 
