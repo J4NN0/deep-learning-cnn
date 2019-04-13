@@ -6,7 +6,7 @@ The code implements a basic NN and CNN, the data loading, the training phase and
 
 **Hint:** I suggest you to do not use your NVIDIA card (or other) in your PC. Usually it does not have a well done Deep Learning framework setup. So, you can use [google colab](https://colab.research.google.com/): a very user friendly python notebook from Google in which you can install python packages, download datasets, plot images, and you have a free GPU to do training.
 
-Before starting **make sure** to add anothe code to your project and past this:
+Before starting **make sure** to add another code to your project and paste this:
 
     !pip3 install -q http://download.pytorch.org/whl/cu90/torch-0.4.0-cp36-cp36m-linux_x86_64.whl
     !pip3 install torchvision
