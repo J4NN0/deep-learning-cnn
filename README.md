@@ -13,7 +13,7 @@ Before starting **make sure** to add another code to your project and paste this
 
 # Table of Contents
 
-  - [Neural Network](#main-concepts)
+  - [Neural Network](#neural-network)
   - [Optimization of the Network Configuration](#optimization-of-the-network-configuration)
   - [Improving](#improving)
   - [Accuracy & Loss](#accuracy--loss)
