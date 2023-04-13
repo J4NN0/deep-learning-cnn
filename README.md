@@ -1,4 +1,4 @@
-# deep-learning-cnn
+# Deep Learning CNN
 
 An implementation of a Convolutional Neural Network (CNN) on a big image dataset. I used [pytorch](https://pytorch.org) but you can use also different deep layer framework.
 
