@@ -14,11 +14,10 @@ Before starting **make sure** to add another code to your project and paste this
 # Table of Contents
 
   - [Neural Network](#neural-network)
-  - [Optimization of the Network Configuration](#optimization-of-the-network-configuration)
-  - [Improving](#improving)
+  - [Network Configuration Optimization](#network-configuration-optimization)
   - [Accuracy & Loss](#accuracy--loss)
   - [Classes](#classes)
-  - [Useful link](#useful-link)
+  - [Resources](#resources)
 
 # Neural Network
 
@@ -50,7 +49,7 @@ So what about size of the hidden layer(s)--how many neurons? There are some empi
 
 In sum, for most problems, one could probably get decent performance (even without a second optimization step) by setting the hidden layer configuration using just two rules: (i) number of hidden layers equals one; and (ii) the number of neurons in that layer is the mean of the neurons in the input and output layers. 
 
-# Optimization of the Network Configuration
+# Network Configuration Optimization
 
 A CNN is characterized by several parameters, such as: epoch, batch size and learnin rate. 
 
@@ -74,7 +73,7 @@ Furthermore, the learning rate affects how quickly our model can converge to a l
 
 **How choose best learning rate?** If we record the learning at each iteration and plot the learning rate (log) against loss; we will see that as the learning rate increase, there will be a point where the loss stops decreasing and starts to increase. In practice, our learning rate should ideally be somewhere to the left to the lowest point of the graph.
 
-# Improving
+### Improvement 
 
 There a lot of things you can do to improve your NN: 
 
@@ -135,7 +134,7 @@ There are also some subtleties while reducing the loss value. For instance, you 
 
   A pretrained netowrk on ImageNet and finetune it on the CIFAR 100 training set.
 
-# Useful link
+# Resources
 
 - [PyTorch NN](https://pytorch.org/docs/stable/nn.html)
 - [NN tutorial](https://pytorch.org/tutorials/beginner/blitz/neural_networks_tutorial.html)
