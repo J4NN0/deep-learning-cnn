@@ -1,28 +1,28 @@
 # deep-learning-cnn
 
-An implementation of a Convolutional Neural Network on a big image dataset. I used [pytorch](https://pytorch.org) but you can use also different deep layer framework.
+An implementation of a Convolutional Neural Network (CNN) on a big image dataset. I used [pytorch](https://pytorch.org) but you can use also different deep layer framework.
 
-The code implements a basic NN and CNN, the data loading, the training phase and the evaluation (testing) phase. The training and testing are on CIFAR 100 dataset (already included in Pytorch).
+The code implements a basic Neural Network (NN) and Convolutional Neural Network (CNN), the data loading, the training phase and the evaluation (i.e. testing) phase. The training and testing are on CIFAR 100 dataset (already included in Pytorch).
 
-**Hint:** I suggest you to do not use your NVIDIA card (or other) in your PC. Usually it does not have a well done Deep Learning framework setup. So, you can use [google colab](https://colab.research.google.com/): a very user friendly python notebook from Google in which you can install python packages, download datasets, plot images, and you have a free GPU to do training.
+**Note**: I would recommend to do not use your NVIDIA card (or other) in your PC as usually it does not have a well done Deep Learning framework setup. You could use [google colab](https://colab.research.google.com/): a very user friendly python notebook from Google in which you can install python packages, download datasets, plot images, and you have a free GPU to do training.
 
 Before starting **make sure** to add another code to your project and paste this:
 
     !pip3 install -q http://download.pytorch.org/whl/cu90/torch-0.4.0-cp36-cp36m-linux_x86_64.whl
     !pip3 install torchvision
 
-# Overview
+# Table of Contents
 
-  - [Main concepts](#main-concepts)
+  - [Neural Network](#main-concepts)
   - [Optimization of the Network Configuration](#optimization-of-the-network-configuration)
   - [Improving](#improving)
   - [Accuracy & Loss](#accuracy--loss)
   - [Classes](#classes)
   - [Useful link](#useful-link)
 
-# Main concepts
+# Neural Network
 
-Every NN has three types of layers: input, hidden, and output. Creating the NN architecture therefore means coming up with values for the number of layers of each type and the number of nodes in each of these layers.
+Every Neural Network (NN) has three types of layers: input, hidden, and output. Creating the NN architecture therefore means coming up with values for the number of layers of each type and the number of nodes in each of these layers.
 
 ### Input layer
 
