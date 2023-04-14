@@ -13,13 +13,13 @@ Before starting **make sure** to add another code to your project and paste this
 
 # Table of Contents
 
-  - [Neural Network](#neural-network)
+  - [Neural Network Concepts](#neural-network-concepts)
   - [Network Configuration Optimization](#network-configuration-optimization)
   - [Accuracy & Loss](#accuracy--loss)
-  - [Classes](#classes)
+  - [Neural Network Classes](#neural-network-classes)
   - [Resources](#resources)
 
-# Neural Network
+# Neural Network Concepts
 
 Every Neural Network (NN) has three types of layers: input, hidden, and output. Creating the NN architecture therefore means coming up with values for the number of layers of each type and the number of nodes in each of these layers.
 
@@ -101,38 +101,36 @@ The accuracy of a model is usually determined after the model parameters are lea
 
 There are also some subtleties while reducing the loss value. For instance, you may run into the problem of over-fitting in which the model "memorizes" the training examples and becomes kind of ineffective for the test set. Over-fitting also occurs in cases where you do not employ a regularization, you have a very complex model (the number of free parameters W is large) or the number of data points N is very low.
 
-# Classes
+# Neural Network Classes
 
-- NN Class
+### Simple Neural Network
 
-  The NN class provides two hidden layers and one FC layer network. I trained this class on the CIFAR 100 train set.
+The NN class (`nn.py`) is a fully connected network (multilayer perceptrons) which provides two hidden layers and one FC layer network. This class was trained on the CIFAR 100 train set. 
 
-- CNN Class
+### Convolutional Neural Network
 
-  The CNN class trained from scratch.
+The CNN class (`cnn.py`) has been trained from scratch using **Stochastic gradient descent** (SGD) optimizer: also known as incremental gradient descent, is an iterative method for optimizing a differentiable objective function, a stochastic approximation of gradient descent optimization. It is called stochastic because samples are selected randomly (or shuffled) instead of as a single group (as in standard gradient descent) or in the order they appear in the training set.
 
-  I decided to use the **Stochastic gradient descent** (SGD) optimizer: also known as incremental gradient descent, is an iterative method for optimizing a differentiable objective function, a stochastic approximation of gradient descent optimization. It is called stochastic because samples are selected randomly (or shuffled) instead of as a single group (as in standard gradient descent) or in the order they appear in the training set.
-  
-  At this point I set the number of **epochs** to 30. The SGD optimizer needs an higher number of epochs in order to return the best accuracy.
-        
-  Then I used **data augmentation** in order to create altered copy of each instance and improve the training: I used the **RandomHorizontalFlip()**.
+Number of **epochs** was set to `30` - the SGD optimizer needs an higher number of epochs in order to return the best accuracy.
 
-  After that, I tried different setting parameters for each used layer:
-  - Convolutional layer         
-    - Kernel size
-    - Stride
-    - Padding
-  - Batch Normalization
-    - momentum
-    - affine
-  - Dropout
-  - Number of neurons
-        
-  Finally, I focused my attention on the type and the number of used layer.
+Then **data augmentation** (i.e. **RandomHorizontalFlip()**) has been used in order to create altered copy of each instance and improve the training.
 
-- ResNet18
+After that, different kind setting parameters has been tested for each used layer:
+- Convolutional layer         
+- Kernel size
+- Stride
+- Padding
+- Batch Normalization
+- Momentum
+- Affine
+- Dropout
+- Number of neurons
 
-  A pretrained netowrk on ImageNet and finetune it on the CIFAR 100 training set.
+Finally, focused on the type and the number of used layer.
+
+### ResNet18
+
+A pretrained netowrk on ImageNet and finetune it on the CIFAR 100 training set.
 
 # Resources
 
