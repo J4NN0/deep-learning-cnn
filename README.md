@@ -2,7 +2,7 @@
 
 An implementation of a Convolutional Neural Network (CNN) on a big image dataset. I used [pytorch](https://pytorch.org) but you can use also different deep layer framework.
 
-The code implements a basic Neural Network (NN) and Convolutional Neural Network (CNN), the data loading, the training phase and the evaluation (i.e. testing) phase. The training and testing are on CIFAR 100 dataset (already included in Pytorch).
+The code implements a basic Neural Network (NN) and Convolutional Neural Network (CNN) with data loading, training and evaluation (i.e. testing) phase. The training and testing are conducted on CIFAR 100 dataset (already included in Pytorch).
 
 **Note**: I would recommend to do not use your NVIDIA card (or other) in your PC as usually it does not have a well done Deep Learning framework setup. You could use [google colab](https://colab.research.google.com/): a very user friendly python notebook from Google in which you can install python packages, download datasets, plot images, and you have a free GPU to do training.
 
@@ -21,7 +21,7 @@ Before starting **make sure** to add another code to your project and paste this
 
 # Neural Network Concepts
 
-Every Neural Network (NN) has three types of layers: input, hidden, and output. Creating the NN architecture therefore means coming up with values for the number of layers of each type and the number of nodes in each of these layers.
+Every Neural Network (NN) has three types of layers: **input**, **hidden**, and **output**. Creating the NN architecture therefore means coming up with values for the number of layers of each type and the number of nodes in each of these layers.
 
 ### Input layer
 
@@ -29,13 +29,10 @@ With respect to the number of neurons comprising this layer, this parameter is c
   
 ### Output layer
 
-Like the Input layer, every NN has exactly one output layer. Determining its size (number of neurons) is simple; it is completely determined by the chosen model configuration.
+Every NN has exactly one output layer. Determining its size (number of neurons) is simple as it is completely determined by the chosen model configuration. If the NN is running in **Machine Mode**, then returns a class label (e.g., "Premium Account"/"Basic Account"); if is running in Regression Mode, then returns a value (e.g., price).
 
-Is your NN going running in Machine Mode or Regression Mode (the ML convention of using a term that is also used in statistics but assigning a different meaning to it is very confusing). Machine mode: returns a class label (e.g., "Premium Account"/"Basic Account"). Regression Mode returns a value (e.g., price).
-
-If the NN is a regressor, then the output layer has a single node.
-
-If the NN is a classifier, then it also has a single node unless softmax is used in which case the output layer has one node per class label in your model.
+- If the NN is a regressor, then the output layer has a single node.
+- If the NN is a classifier, then it also has a single node unless softmax is used in which case the output layer has one node per class label in your model.
 
 ### Hidden layer
 
@@ -113,10 +110,10 @@ The CNN class (`cnn.py`) has been trained from scratch using **Stochastic gradie
 
 Number of **epochs** was set to `30` - the SGD optimizer needs an higher number of epochs in order to return the best accuracy.
 
-Then **data augmentation** (i.e. **RandomHorizontalFlip()**) has been used in order to create altered copy of each instance and improve the training.
+Then **data augmentation** (i.e. `RandomHorizontalFlip()`) has been used in order to create altered copy of each instance and improve the training.
 
 After that, different kind setting parameters has been tested for each used layer:
-- Convolutional layer         
+- Convolutional layer
 - Kernel size
 - Stride
 - Padding
