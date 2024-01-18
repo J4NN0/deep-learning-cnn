@@ -13,11 +13,16 @@ Before starting **make sure** to add another code to your project and paste this
 
 # Table of Contents
 
-  - [Neural Network Concepts](#neural-network-concepts)
-  - [Network Configuration Optimization](#network-configuration-optimization)
-  - [Accuracy & Loss](#accuracy--loss)
-  - [Neural Network Classes](#neural-network-classes)
-  - [Resources](#resources)
+- [Neural Network Concepts](#neural-network-concepts)
+    - [Input layer](#input-layer)
+    - [Output layer](#output-layer)
+    - [Hidden layer](#hidden-layer)
+- [Network Configuration Optimization](#network-configuration-optimization)
+- [Accuracy & Loss](#accuracy--loss)
+- [Neural Network Classes](#neural-network-classes)
+    - [Simple Neural Network](#simple-neural-network)
+    - [Convolutional Neural Network](#convolutional-neural-network)
+- [Resources](#resources)
 
 # Neural Network Concepts
 
@@ -70,7 +75,7 @@ Furthermore, the learning rate affects how quickly our model can converge to loc
 
 **How choose the best learning rate?** If we record the learning at each iteration and plot the learning rate (log) against loss; we will see that as the learning rate increases, there will be a point where the loss stops decreasing and starts to increase. In practice, our learning rate should ideally be somewhere to the left to the lowest point of the graph.
 
-### Improvement 
+### Improvement
 
 There are a lot of things you can do to improve your NN: 
 
